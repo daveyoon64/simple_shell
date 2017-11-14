@@ -13,6 +13,7 @@
 #include "sfsh_tokenize.c"
 #include "sfsh_execute.c"
 #include "sfsh_loop.c"
+#include "sfsh_launch.c"
 
 
 
@@ -21,10 +22,11 @@ void sfsh_loop(int argc, char *argv[]);
 char *sfsh_getline(void);
 char **sfsh_tokenize(char *line, int number_of_arguments);
 int sfsh_execute(char **args);
+int sfsh_launch(char **args);
 
 /* built-ins */
-int hsh_help(char **args);
-int hsh_exit(char **args);
+int sfsh_help(char **args);
+int sfsh_exit(char **args);
 
 
 

@@ -2,7 +2,7 @@
 
 
 
-int hsh_help(char **args)
+int sfsh_help(char **args)
 {
  	int i;
 	int builtin_amount = 2;
@@ -14,7 +14,7 @@ int hsh_help(char **args)
 }
 
 
-int hsh_exit(char **args)
+int sfsh_exit(char **args)
 {
 
 	return (0);
