@@ -4,7 +4,6 @@
 int sfsh_execute(char **args)
 {
 	int status = 1, i = 0;
-
 	typedef struct builtin
 	{
 		char *name;
