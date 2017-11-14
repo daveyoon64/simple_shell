@@ -4,17 +4,15 @@
 int sfsh_execute(char **args)
 {
 	int status = 1, i = 0;
-
 	typedef struct builtin
 	{
 		char *name;
 		int (*function)(char **);
 	} builtin_t;
-
-
+	
 	builtin_t builtins[] = {
-		{"help", hsh_help},
-		{"exit", hsh_exit}
+		{"help", sfsh_help},
+		{"exit", sfsh_exit}
 	};
 
 	for (i = 0; i < 2; i++)
@@ -26,6 +24,5 @@ int sfsh_execute(char **args)
 
 
 	}
-
-	return (0);
+	return (sfsh_launch(args));
 }
