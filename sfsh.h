@@ -12,6 +12,15 @@
 #include "sfsh_execute.c"
 #include "sfsh_loop.c"
 
+/**
+ * builtin - data type for our built-in commads, paired with function pointers
+ * @name: name of our built-in command
+ * @f: function pointer of related command
+ */
+typedef struct builtin {
+	char *name;
+	int (*f)(args);
+} builtin_t;
 
 void sfsh_loop(int argc, char *argv[]);
 char *sfsh_getline(void);
