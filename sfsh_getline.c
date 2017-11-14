@@ -9,6 +9,7 @@ char *sfsh_getline(void)
 	char *line = NULL;
 	size_t b_size = 0;
 
+	printf("($)");
 	getline(&line, &b_size, stdin);
 	return (line);
 }
