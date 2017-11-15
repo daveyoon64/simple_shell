@@ -22,6 +22,21 @@ int arg_count(char *line)
 
 	return (match);
 }
+/**
+ * strcmp - compare two strings
+ * @s1: the first string
+ * @s2: the second string
+ * Return: 0 if the same, positive/negative value otherwise
+ */
+int _strcmp(char *s1, char *s2)
+{
+	int s1d, s2d;
 
-
-
+	do {
+		s1d = *s1++;
+		s2d = *s2++;
+		if (s1d == '\0')
+			return (s1d -s2d);
+	} while (s1d == s2d);
+	return (s1d - s2d);
+}
