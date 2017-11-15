@@ -11,8 +11,6 @@ void sfsh_loop(int argc, char *argv[])
 	char **tokens;
 	int status, arg_num;
 
-	(void) argc;
-	(void) argv;
 	do {
 		line = sfsh_getline();
 		arg_num = arg_count(line);

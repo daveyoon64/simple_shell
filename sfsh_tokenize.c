@@ -27,7 +27,6 @@ char **sfsh_tokenize(char *line, int number_of_arguments)
 	}
 
 	token = strtok(line, DELIM);
-
 	while (token != NULL)
 	{
 		tokens[i] = token;

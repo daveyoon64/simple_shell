@@ -39,6 +39,8 @@ int sfsh_help(char **args)
  */
 int sfsh_exit(char **args)
 {
+	printf("exiting id: %d\n", getpid());
+	printf("exiting parent id: %d\n", getppid());
 	return (0);
 }
 

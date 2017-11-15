@@ -22,21 +22,51 @@ int arg_count(char *line)
 
 	return (match);
 }
-/**
- * strcmp - compare two strings
- * @s1: the first string
- * @s2: the second string
- * Return: 0 if the same, positive/negative value otherwise
- */
-int _strcmp(char *s1, char *s2)
-{
-	int s1d, s2d;
 
-	do {
-		s1d = *s1++;
-		s2d = *s2++;
-		if (s1d == '\0')
-			return (s1d -s2d);
-	} while (s1d == s2d);
-	return (s1d - s2d);
+
+/**
+ * get_path   - Returns the path from the environment
+ *
+ * Return:      The path from the environment as a string
+ */
+
+char **get_path()
+{
+	char **dirs;
+	char *path, *path_dupe;
+	int i = 0;
+
+	dirs = malloc(sizeof(char *) * 32);
+	if (!dirs)
+	{
+		printf("error allocating memory\n");
+		exit(101);
+	}
+
+	while (environ[i])
+	{
+		if (_strncmp("PATH=", environ[i], 5) == 0)
+		{
+			path = environ[i];
+			break;
+		}
+		i++;
+	}
+
+	/* Make a copy of env path so as not to alter actual path */
+	path_dupe = _strdup(path);
+	path_dupe += 5;
+
+	i = 0;
+	path_dupe = strtok(path_dupe, ":");
+	while (path_dupe != NULL)
+	{
+		dirs[i] = path_dupe;
+		i++;
+		path_dupe = strtok(NULL, ":");
+	}
+
+	free(path_dupe);
+
+	return (dirs);
 }
