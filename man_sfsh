@@ -1,0 +1,26 @@
+.TH man 2 "11 November 2017" "0.32" "_SFSH man page"
+.SH NAME
+.B sfsh - Super Friendship SHell
+.SH SYNOPSIS
+sfsh [command_string | file]
+
+.SH DESCRIPTION
+SFSH is an sh-compatible command language interpreter that executes commands read from the standard input or from a file.
+
+.SH OPTIONS
+.B help
+
+Tells the user more about the SFSH and outputs a list of handy built-ins.
+ 
+.B exit
+
+Allows the user to exit the Super Friendship SHell.
+
+.SH SEE ALSO
+.I bash(1)
+
+.SH BUGS
+No known bugs, besides all the checks we've missed.
+
+.SH AUTHORS
+Henry Hsu, David Yoon
