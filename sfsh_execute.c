@@ -12,7 +12,8 @@ int sfsh_execute(char **args)
 	
 	builtin_t builtins[] = {
 		{"help", sfsh_help},
-		{"exit", sfsh_exit}
+		{"exit", sfsh_exit},
+		{"env", sfsh_env}
 	};
 
 	for (i = 0; i < 2; i++)
