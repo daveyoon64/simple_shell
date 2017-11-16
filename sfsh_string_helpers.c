@@ -54,10 +54,8 @@ char *_strdup(char *src)
 	char *dest, *ptr;
 	int i = 0;
 
-	while (src[i])
-	{
-		i++;
-	}
+	while (src[++i])
+		;
 
 	if (!(dest = malloc(i + 1)))
 	{
@@ -89,27 +87,17 @@ char *cmdcat(char *dir, char *file)
 {
 	int dir_length = 0, file_length = 0;
 
-//	printf("processing %s\n", dir);
-
-
-	while(dir[dir_length])
-	{
-		dir_length++;
-	}
+	while(dir[++dir_length])
+		;
 
 	dir[dir_length] = '/';
 	dir_length++;
 
 	while(file[file_length])
 	{
-		dir[dir_length] = file[file_length];
-		dir_length++;
-		file_length++;
+		dir[dir_length++] = file[file_length++];
 	}
 	dir[dir_length] = '\0';
-
-//	printf("dir len: %d\n", dir_length);
-//	printf("returning %s\n", dir);
 
 	return (dir);
 }

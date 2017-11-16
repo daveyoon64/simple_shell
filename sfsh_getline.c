@@ -8,8 +8,19 @@ char *sfsh_getline(void)
 {
 	char *line = NULL;
 	size_t b_size = 0;
+	int i = 0;
 
 	printf("($)");
 	getline(&line, &b_size, stdin);
+
+	while (line[i]){
+		i++;
+	}
+
+	if (i <= 1)
+	{
+		line = "";
+	}
+
 	return (line);
 }

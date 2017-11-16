@@ -6,6 +6,7 @@ extern char **environ;
  * @args: pointer to array of tokens
  * Return: 1 on success
  */
+
 int sfsh_env(char **args)
 {
 	int i = 0;
@@ -17,11 +18,13 @@ int sfsh_env(char **args)
 	}
 	return (1);
 }
+
 /**
  * sfsh_help - displays help
  * @args: pointer to array of tokens
  * Return: 1 if runs
  */
+
 int sfsh_help(char **args)
 {
  	int i;
@@ -32,16 +35,32 @@ int sfsh_help(char **args)
 
 	return (1);
 }
+
 /**
  * sfsh_exit - function to exit sfsh
  * @args: pointer to array of tokens
  * Return: 0
  */
+
 int sfsh_exit(char **args)
 {
+	printf("**************** Exit Builtin *******************\n");
 	printf("exiting id: %d\n", getpid());
 	printf("exiting parent id: %d\n", getppid());
 	return (0);
 }
 
+/**
+ * sfsh_error    - Triggered if user enters no input
+ *
+ * @args:          pointer to array of tokens
+ *
+ * Return:         1
+ */
 
+int sfsh_error(char **args)
+{
+	printf("Give me something to do!\n");
+
+	return (1);
+}

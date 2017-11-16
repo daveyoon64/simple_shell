@@ -14,9 +14,10 @@ int sfsh_execute(char **args)
 		{"help", sfsh_help},
 		{"exit", sfsh_exit},
 		{"env", sfsh_env},
+		{"", sfsh_error}
 	};
 
-	size = (sizeof(builtins) / (sizeof(char *) * 2)) - 1;
+	size = (sizeof(builtins) / (sizeof(char *) * 2));
 
 	for (i = 0; i < size; i++)
 	{

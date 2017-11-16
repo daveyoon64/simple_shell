@@ -1,5 +1,6 @@
 #include "sfsh.h"
-//extern char **environ;
+
+#define BUFFER_SIZE 32
 
 int sfsh_launch(char **args)
 {
@@ -9,10 +10,9 @@ int sfsh_launch(char **args)
 	char *command;
 	struct dirent *p_Dirent;
 	DIR *p_dir;
-	char slash;
 
 	/* allocate memory for 'dirs' to hold array of path directories */
-	dirs = malloc(sizeof(char *) * 32);
+	dirs = malloc(sizeof(char *) * BUFFER_SIZE);
 	if (!dirs)
 	{
 		printf("Error allocating memory\n");
@@ -22,17 +22,14 @@ int sfsh_launch(char **args)
 	pid = fork();
 	if (pid == 0)
 	{
-		slash = args[0][0];
 		/* given full path, run as is */
-		if (slash == '/')
+		if (args[0][0] == '/')
 		{
+			free(dirs);
 			if (execve(args[0], args, NULL) == -1)
 			{
 				perror("Error launcher:");
 			}
-			free(args);
-			free(dirs);
-			exit(102);
 		}
 
 		for (i = 0; dirs[i] != '\0'; i++)
@@ -59,9 +56,11 @@ int sfsh_launch(char **args)
 	}
 	else
 	{
-		do {
-			wpid = waitpid(pid, &status, WUNTRACED);
-		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		wait(&status);
+		printf("returning to parent with id %d\n", getppid());
+//		do {
+//			wpid = waitpid(pid, &status, WUNTRACED);
+//		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 
 	free(dirs);

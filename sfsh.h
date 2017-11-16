@@ -10,6 +10,7 @@ extern char **environ;
 #include <sys/wait.h>
 #include <dirent.h>
 
+#include "sfsh_debug.c"
 #include "sfsh_string_helpers.c"
 #include "sfsh_helpers.c"
 #include "sfsh_launch.c"

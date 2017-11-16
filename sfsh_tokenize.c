@@ -10,8 +10,6 @@
  * Return:                pointer to the string
  */
 
-
-
 char **sfsh_tokenize(char *line, int number_of_arguments)
 {
 	char **tokens;
@@ -19,11 +17,17 @@ char **sfsh_tokenize(char *line, int number_of_arguments)
 	int i = 0;
 
 	tokens = malloc(sizeof(char*) *number_of_arguments);
-
 	if (tokens == NULL)
 	{
 		printf("Failure to allocate\n");
-		exit(101);
+		return (NULL);
+	}
+
+	/* Case handling if no user input */
+	if (line == "")
+	{
+		tokens[0] = "";
+		return (tokens);
 	}
 
 	token = strtok(line, DELIM);
