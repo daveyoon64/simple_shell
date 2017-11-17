@@ -6,7 +6,7 @@
  */
 char *sfsh_getline(void)
 {
-	/* line is not freed on return, still reachable in valgrind */
+	/* line is still reachable in valgrind if 'enter' as input */
 	char *line = NULL;
 	size_t b_size = 0;
 	int i = 0;
@@ -14,7 +14,8 @@ char *sfsh_getline(void)
 	printf("($)");
 	getline(&line, &b_size, stdin);
 
-	while (line[i]){
+	while (line[i])
+	{
 		i++;
 	}
 

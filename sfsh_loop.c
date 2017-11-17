@@ -15,15 +15,18 @@ void sfsh_loop(int argc, char *argv[])
 
 	do {
 		line = sfsh_getline();
-//		arg_num = arg_count(line);
 		tokens = sfsh_tokenize(line);
 		status = sfsh_execute(tokens);
 
 		if (line != "")
 		{
-			/* memory leak if 'enter' is user input. fix this */
 			free(line);
 		}
+		else
+		{
+			/* memory leak if 'enter' is user input. fix this */			
+		}
+
 		free(tokens);
 
 	} while (status);

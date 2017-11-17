@@ -3,6 +3,8 @@
 /**
  * get_path   - Returns the path from the environment
  *
+ * @dest:       E
+ *
  * Return:      The path from the environment as a string
  */
 
@@ -21,7 +23,6 @@ char *get_path(char *dest)
 		i++;
 	}
 
-	printf("init path: %s\n", dest);
 	return (dest);
 }
 

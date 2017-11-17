@@ -14,7 +14,6 @@ int sfsh_launch(char **args, char **dirs)
 		/* Given full path to run program */
 		if (args[0][0] == '/')
 		{
-//			printf("@@@@@@@ Operation Sad Cronut @@@@@@@\n");			
 			if (execve(args[0], args, NULL) == -1)
 			{
 				perror("Error launching dir/prog\n");
@@ -29,7 +28,6 @@ int sfsh_launch(char **args, char **dirs)
 			{
 				if (_strcmp(p_file->d_name, args[0]) == 0)
 				{
-//					printf("!!!!! We're go for Azerbaijan !!!!!\n");					
 					command = cmdcat(dirs[i], args[0]);
 					if (execve(command, args, NULL) == -1)
 					{
@@ -49,7 +47,6 @@ int sfsh_launch(char **args, char **dirs)
 	else
 	{
 		wait(&status);
-//		printf("Returned to parent %d\n", getppid());
 	}
 
 	return (status);

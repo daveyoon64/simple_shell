@@ -30,8 +30,13 @@ int sfsh_help(char **args)
  	int i;
 	int builtin_amount = 2;
 
-
-	printf("List of built-ins\n");
+	printf("|-----------------------------------------------|\n");
+	printf("| Name\t| Description\t\t\t\t|\n");
+	printf("|-------|---------------------------------------|\n");
+	printf("| help\t| This document\t\t\t\t|\n");
+	printf("| env\t| Prints out the system environment\t|\n");
+	printf("| exit\t| Exit Super Friendship shell\t\t|\n");
+	printf("|-----------------------------------------------|\n");
 
 	return (1);
 }

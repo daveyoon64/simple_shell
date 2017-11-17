@@ -21,7 +21,6 @@ int _strcmp(char *s1, char *s2)
 	return (s1d - s2d);
 }
 
-
 /**
  * _strncmp    - Checks if @s1 matches @s2 up to @length amount
  *
@@ -40,55 +39,25 @@ int _strncmp(char *s1, char *s2, int length)
 	return (length == 0 ? 0 : *s1 - *s2);
 }
 
-
 /**
- * _strdup     - Makes and returns a copy of @src string
+ * _strcpy     - Makes a copy of @src string into @dest string
  *
- * @src:         Source string to be duplicated
+ * @dest:        String to be returned
+ * @src:         String to be copied
  *
- * Return:       Pointer to string that is duplicate of @src
+ * Return:       @dest
  */
-
-char *_strdup(char *src)
-{
-	char *dest, *ptr;
-	char *string;
-	int i = 0;
-
-	while (src[++i])
-		;
-
-	if (!(dest = malloc(i + 1)))
-	{
-		printf("Memory allocate error for _strdup\n");
-		return (NULL);
-	}
-
-	ptr = dest;
-	while (*src)
-	{
-		*ptr++ = *src++;
-	}
-	*ptr = '\0';
-
-	return (dest);
-}
-
 
 char *_strcpy(char *dest, char *src)
 {
 	int i;
 
-	for (i = 0; src[i]!= '\0'; i++)
-	{
-		dest[i] = src[i];
-	}
+	for (i = 0; src[i]!= '\0' && (dest[i] = src[i]); i++)
+		;
 	dest[i] = '\0';
 
 	return (dest);
 }
-
-
 
 /**
  * cmdcat     - Concatenates @dir and @file into executable format
@@ -106,8 +75,7 @@ char *cmdcat(char *dir, char *file)
 	while(dir[++dir_length])
 		;
 
-	dir[dir_length] = '/';
-	dir_length++;
+	dir[dir_length++] = '/';
 
 	while(file[file_length])
 	{
