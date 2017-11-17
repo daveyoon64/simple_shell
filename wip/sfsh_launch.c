@@ -15,31 +15,15 @@ int sfsh_launch(char **args)
 	{
 		printf("Error allocating memory\n");
 	}
-
-	/* test output */
-	printf("sird\n");
-	for (i = 0; dirs[i] != NULL; i++)
-	{
-		printf("sird: %s\n", dirs[i]);
-	}
-
-
-	printf("launch addy: %p\n", &dirs);
 	dirs = get_path();
 
-	/* test output */
-	for (i = 0; dirs[i] != NULL; i++)
-	{
-		printf("dirs: %s\n", dirs[i]);
-	}
+	printf("address: %p\n", &args);
 
-
-/*
 	pid = fork();
 	if (pid == 0)
 	{
-*/		/* given full path, run as is */
-/*		if (args[0][0] == '/')
+		/* given full path, run as is */
+		if (args[0][0] == '/')
 		{
 			printf("^^^^^^^^^^^^ running slash ^^^^^^^^^^\n");
 			if (execve(args[0], args, NULL) == -1)
@@ -79,9 +63,10 @@ int sfsh_launch(char **args)
 //			wpid = waitpid(pid, &status, WUNTRACED);
 //		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-*/
+
 
 	free(dirs);
+	free(args);
 
 	return (1);
 }

@@ -11,10 +11,10 @@ extern char **environ;
 #include <sys/wait.h>
 #include <dirent.h>
 
-#include "sfsh_debug.c"
+//#include "sfsh_debug.c"
 #include "sfsh_string_helpers.c"
 #include "sfsh_helpers.c"
-#include "sfsh_launch.c"
+//#include "sfsh_launch.c"
 #include "sfsh_builtins0.c"
 #include "sfsh_getline.c"
 #include "sfsh_tokenize.c"
@@ -35,7 +35,7 @@ int sfsh_exit(char **args);
 int sfsh_error(char **args);
 
 /* helpers */
-
+char **get_path();
 
 
 #endif /* end of SFSH_H_ header guard */

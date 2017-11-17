@@ -40,5 +40,11 @@ char **sfsh_tokenize(char *line)
 	}
 	tokens[i] = NULL;
 
+		for (i = 0; tokens[i] != NULL; i++)
+		{
+			printf("arg: %s\n", tokens[i]);
+		}
+
+
 	return (tokens);
 }
