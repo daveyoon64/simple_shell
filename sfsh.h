@@ -27,7 +27,7 @@ void sfsh_loop(int argc, char *argv[]);
 char *sfsh_getline(void);
 char **sfsh_tokenize(char *line);
 int sfsh_execute(char **args);
-int sfsh_launch(char **args);
+int sfsh_launch(char **args, char **dirs);
 
 /* built-ins */
 int sfsh_help(char **args);

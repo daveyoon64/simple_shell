@@ -1,87 +1,56 @@
 #include "sfsh.h"
 
-int sfsh_launch(char **args)
+int sfsh_launch(char **args, char **dirs)
 {
-	pid_t pid, wpid;
-	int status, i = 0;
-	char **dirs;
-	char *command;
-	struct dirent *p_Dirent;
+	int status = 1, i = 0;
+	struct dirent *p_file;
 	DIR *p_dir;
+	pid_t pid;
+	char *command = NULL;
 
-	/* allocate memory for 'dirs' to hold array of path directories */
-	dirs = malloc(sizeof(char *) * BUFFER_SIZE);
-	if (!dirs)
-	{
-		printf("Error allocating memory\n");
-	}
-
-	/* test output */
-	printf("sird\n");
-	for (i = 0; dirs[i] != NULL; i++)
-	{
-		printf("sird: %s\n", dirs[i]);
-	}
-
-
-	printf("launch addy: %p\n", &dirs);
-	dirs = get_path();
-
-	/* test output */
-	for (i = 0; dirs[i] != NULL; i++)
-	{
-		printf("dirs: %s\n", dirs[i]);
-	}
-
-
-/*
 	pid = fork();
 	if (pid == 0)
 	{
-*/		/* given full path, run as is */
-/*		if (args[0][0] == '/')
+		/* Given full path to run program */
+		if (args[0][0] == '/')
 		{
-			printf("^^^^^^^^^^^^ running slash ^^^^^^^^^^\n");
+//			printf("@@@@@@@ Operation Sad Cronut @@@@@@@\n");			
 			if (execve(args[0], args, NULL) == -1)
 			{
-				perror("Error launcher:");
+				perror("Error launching dir/prog\n");
 			}
 		}
 
-		for (i = 0; dirs[i] != '\0'; i++)
+		/* Given only program name, search path */
+		for(i = 0; dirs[i] != '\0'; i++)
 		{
 			p_dir = opendir(dirs[i]);
-
-			while ((p_Dirent = readdir(p_dir)) != NULL)
+			while ((p_file = readdir(p_dir)) != NULL)
 			{
-				if (_strcmp(p_Dirent->d_name, args[0]) == 0)
+				if (_strcmp(p_file->d_name, args[0]) == 0)
 				{
-			printf("******* running regular *******\n");
+//					printf("!!!!! We're go for Azerbaijan !!!!!\n");					
 					command = cmdcat(dirs[i], args[0]);
 					if (execve(command, args, NULL) == -1)
 					{
-						perror("Error launcher:");
+						perror("Error finding program in path\n");
 					}
 				}
 			}
 			closedir(p_dir);
 		}
+		exit(0);
 	}
 	else if (pid < 0)
 	{
-		perror("Error forking");
+		perror("Fork error in launcher.\n");
+		exit (103);
 	}
 	else
 	{
 		wait(&status);
-		printf("returning to parent with id %d\n", getppid());
-//		do {
-//			wpid = waitpid(pid, &status, WUNTRACED);
-//		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+//		printf("Returned to parent %d\n", getppid());
 	}
-*/
 
-	free(dirs);
-
-	return (1);
+	return (status);
 }

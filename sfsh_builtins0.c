@@ -44,9 +44,7 @@ int sfsh_help(char **args)
 
 int sfsh_exit(char **args)
 {
-	printf("**************** Exit Builtin *******************\n");
-	printf("exiting id: %d\n", getpid());
-	printf("exiting parent id: %d\n", getppid());
+	printf("Leaving Super Friendship Shell.  Your loss\n");
 	return (0);
 }
 
