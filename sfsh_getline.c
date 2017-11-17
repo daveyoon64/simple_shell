@@ -8,6 +8,7 @@ char *sfsh_getline(void)
 {
 	/* line is still reachable in valgrind if 'enter' as input */
 	char *line = NULL;
+	char **temp;
 	size_t b_size = 0;
 	int i = 0;
 

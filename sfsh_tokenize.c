@@ -38,5 +38,6 @@ char **sfsh_tokenize(char *line)
 	}
 	tokens[i] = NULL;
 
+
 	return (tokens);
 }

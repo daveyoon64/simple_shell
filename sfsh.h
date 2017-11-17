@@ -11,7 +11,7 @@ extern char **environ;
 #include <sys/wait.h>
 #include <dirent.h>
 
-/* Comment below includes to enable *.c compiling */
+/*
 #include "sfsh_string_helpers.c"
 #include "sfsh_helpers.c"
 #include "sfsh_launch.c"
@@ -20,14 +20,7 @@ extern char **environ;
 #include "sfsh_tokenize.c"
 #include "sfsh_execute.c"
 #include "sfsh_loop.c"
-
-
-typedef struct builtin
-{
-	char *name;
-	int (*function)(char **);
-} builtin_t;
-
+*/
 
 /* Core functions */
 void sfsh_loop(int argc, char *argv[]);

@@ -6,12 +6,13 @@ int sfsh_execute(char **args)
 	char temp[150];
 	char *path = NULL;
 	char **dirs;
+	
 	typedef struct builtin
 	{
 		char *name;
 		int (*function)(char **);
 	} builtin_t;
-	
+
 	builtin_t builtins[] = {
 		{"help", sfsh_help},
 		{"exit", sfsh_exit},
@@ -32,7 +33,6 @@ int sfsh_execute(char **args)
 		if (_strcmp(args[0], builtins[i].name) == 0)
 		{
 			/* Running found matching builtin */
-//			printf ("***** mysterious possum  protocol *****\n");
 			free (path);
 			free (dirs);
 			return (builtins[i].function(args));
@@ -40,7 +40,6 @@ int sfsh_execute(char **args)
 	}
 
 	/* No matching builtins, search for program in path */
-//	printf ("^^^^^^^^ happy monkey protocol ^^^^^^^^\n");
 	while (environ[i])
 	{
 		if (_strncmp("PATH=", environ[i], 5) == 0)

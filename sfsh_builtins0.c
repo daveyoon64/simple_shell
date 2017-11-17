@@ -27,9 +27,6 @@ int sfsh_env(char **args)
 
 int sfsh_help(char **args)
 {
- 	int i;
-	int builtin_amount = 2;
-
 	printf("|-----------------------------------------------|\n");
 	printf("| Name\t| Description\t\t\t\t|\n");
 	printf("|-------|---------------------------------------|\n");
@@ -63,7 +60,7 @@ int sfsh_exit(char **args)
 
 int sfsh_error(char **args)
 {
-	printf("Give me something to do!\n");
+	printf("Please enter a command\n");
 
 	return (1);
 }

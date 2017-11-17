@@ -24,7 +24,8 @@ void sfsh_loop(int argc, char *argv[])
 		}
 		else
 		{
-			/* memory leak if 'enter' is user input. fix this */			
+			printf("cleanup\n");
+
 		}
 
 		free(tokens);
