@@ -29,9 +29,11 @@ int sfsh_launch(char **args, char **dirs)
 			while ((p_file = readdir(p_dir)) != NULL)
 			{
 				if (_strcmp(p_file->d_name, args[0]) == 0)
+				{
 					command = cmdcat(dirs[i], args[0]);
 					if (execve(command, args, NULL) == -1)
 						perror("Error finding program in path\n");
+				}
 			}
 			closedir(p_dir);
 		}

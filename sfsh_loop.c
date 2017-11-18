@@ -18,13 +18,13 @@ void sfsh_loop(int argc, char *argv[])
 		tokens = sfsh_tokenize(line);
 		status = sfsh_execute(tokens);
 
-		if ((line != NULL) && (line[0] == '\0'))
+		if (line != NULL)
 		{
 			free(line);
 		}
 		else
 		{
-			printf("cleanup\n");
+			/* handle 'enter' mem leak here */
 		}
 		free(tokens);
 	} while (status);
