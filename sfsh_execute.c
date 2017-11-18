@@ -1,4 +1,5 @@
 #include "sfsh.h"
+void check_environ(char *path, char temp[], char **dirs);
 /**
  * sfsh_execute - search builtins for function to execute & send to sfsh_launch
  * @args: pointer to list of arguments
@@ -35,6 +36,24 @@ int sfsh_execute(char **args)
 		}
 	}
 	/* No matching builtins, search for program in path */
+	check_environ(path, temp, dirs);
+	free(path);
+	/* No builtins found, search path and run matching executable */
+	sfsh_launch(args, dirs);
+	free(dirs);
+	return (1);
+}
+/**
+ * check_environ - checks environment variables for command
+ * @path: our tokenized string of PATH
+ * @temp: a temporary array to hold characters
+ * @dirs: pointer to our array of directories
+ * Return: Nothing
+ */
+void check_environ(char *path, char temp[], char **dirs)
+{
+	int i = 0;
+
 	while (environ[i])
 	{
 		if (_strncmp("PATH=", environ[i], 5) == 0)
@@ -53,10 +72,5 @@ int sfsh_execute(char **args)
 		i++;
 		path = strtok(NULL, ":");
 	}
-	dirs[i] = '\0';
-	free(path);
-	/* No builtins found, search path and run matching executable */
-	sfsh_launch(args, dirs);
-	free(dirs);
-	return (1);
+	dirs[i] = NULL;
 }
