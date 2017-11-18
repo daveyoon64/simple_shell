@@ -11,16 +11,17 @@ extern char **environ;
 #include <sys/wait.h>
 #include <dirent.h>
 
-/*
-#include "sfsh_string_helpers.c"
-#include "sfsh_helpers.c"
-#include "sfsh_launch.c"
-#include "sfsh_builtins0.c"
-#include "sfsh_getline.c"
-#include "sfsh_tokenize.c"
-#include "sfsh_execute.c"
-#include "sfsh_loop.c"
-*/
+/**
+ * struct builtin - data type for our list of builtins
+ * @name: name of command
+ * @function: the function pointer of associated name
+ */
+typedef struct builtin
+{
+	char *name;
+	int (*function)(char **);
+} builtin_t;
+
 
 /* Core functions */
 void sfsh_loop(int argc, char *argv[]);
@@ -42,6 +43,5 @@ char *_strcpy(char *dest, char *src);
 char *cmdcat(char *dir, char *file);
 
 char *get_path(char *dest);
-
 
 #endif /* end of SFSH_H_ header guard */

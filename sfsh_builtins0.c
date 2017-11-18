@@ -1,16 +1,14 @@
 #include "sfsh.h"
-extern char **environ;
-
 /**
  * sfsh_env - prints the current environment
  * @args: pointer to array of tokens
  * Return: 1 on success
  */
-
 int sfsh_env(char **args)
 {
 	int i = 0;
 
+	(void) args;
 	while (environ[i])
 	{
 		printf("%s\n", environ[i]);
@@ -18,15 +16,14 @@ int sfsh_env(char **args)
 	}
 	return (1);
 }
-
 /**
  * sfsh_help - displays help
  * @args: pointer to array of tokens
  * Return: 1 if runs
  */
-
 int sfsh_help(char **args)
 {
+	(void) args;
 	printf("|-----------------------------------------------|\n");
 	printf("| Name\t| Description\t\t\t\t|\n");
 	printf("|-------|---------------------------------------|\n");
@@ -34,22 +31,19 @@ int sfsh_help(char **args)
 	printf("| env\t| Prints out the system environment\t|\n");
 	printf("| exit\t| Exit Super Friendship shell\t\t|\n");
 	printf("|-----------------------------------------------|\n");
-
 	return (1);
 }
-
 /**
  * sfsh_exit - function to exit sfsh
  * @args: pointer to array of tokens
  * Return: 0
  */
-
 int sfsh_exit(char **args)
 {
+	(void) args;
 	printf("Leaving Super Friendship Shell.  Your loss\n");
 	return (0);
 }
-
 /**
  * sfsh_error    - Triggered if user enters no input
  *
@@ -57,10 +51,9 @@ int sfsh_exit(char **args)
  *
  * Return:         1
  */
-
 int sfsh_error(char **args)
 {
+	(void) args;
 	printf("Please enter a command\n");
-
 	return (1);
 }

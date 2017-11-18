@@ -8,27 +8,24 @@
  *
  * Return:                pointer to the string
  */
-
 char **sfsh_tokenize(char *line)
 {
 	char **tokens;
 	char *token = NULL;
 	int i = 0;
 
-	tokens = malloc(sizeof(char*) * BUFFER_SIZE);
+	tokens = malloc(sizeof(char *) * BUFFER_SIZE);
 	if (tokens == NULL)
 	{
 		printf("Failure to allocate\n");
 		return (NULL);
 	}
-
 	/* Case handling if no user input */
-	if (line == "")
+	if ((line == NULL) && (line[0] == '\0'))
 	{
 		tokens[0] = "";
 		return (tokens);
 	}
-
 	/* Actual user input. Process into array of tokens */
 	token = strtok(line, DELIM);
 	while (token != NULL)
@@ -37,7 +34,5 @@ char **sfsh_tokenize(char *line)
 		token = strtok(NULL, DELIM);
 	}
 	tokens[i] = NULL;
-
-
 	return (tokens);
 }

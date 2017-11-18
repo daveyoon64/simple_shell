@@ -9,26 +9,23 @@ void sfsh_loop(int argc, char *argv[])
 {
 	char *line = NULL;
 	char **tokens;
-	int status = 1, arg_num;
+	int status = 1;
 
-	int i = 0;
-
+	(void) argc;
+	(void) argv;
 	do {
 		line = sfsh_getline();
 		tokens = sfsh_tokenize(line);
 		status = sfsh_execute(tokens);
 
-		if (line != "")
+		if ((line != NULL) && (line[0] == '\0'))
 		{
 			free(line);
 		}
 		else
 		{
 			printf("cleanup\n");
-
 		}
-
 		free(tokens);
-
 	} while (status);
 }
