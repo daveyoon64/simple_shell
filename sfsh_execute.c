@@ -25,6 +25,11 @@ int sfsh_execute(char **args)
 		exit(101);
 	}
 	size = (sizeof(builtins) / (sizeof(char *) * 2));
+	if (args[0] == '\0')
+	{
+		free(dirs);
+		return (1);
+	}
 	for (i = 0; i < size; i++)
 	{
 		if (_strcmp(args[0], builtins[i].name) == 0)

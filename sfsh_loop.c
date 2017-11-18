@@ -18,14 +18,15 @@ void sfsh_loop(int argc, char *argv[])
 		tokens = sfsh_tokenize(line);
 		status = sfsh_execute(tokens);
 
-		if (line != NULL)
+		if (status == 1)
 		{
-			free(line);
+			/* when 1, line has already been freed */
+			free(tokens);
 		}
 		else
 		{
-			/* handle 'enter' mem leak here */
+			free(line);	
+			free(tokens);
 		}
-		free(tokens);
 	} while (status);
 }

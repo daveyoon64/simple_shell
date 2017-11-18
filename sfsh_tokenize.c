@@ -21,7 +21,7 @@ char **sfsh_tokenize(char *line)
 		return (NULL);
 	}
 	/* Case handling if no user input */
-	if ((line == NULL) && (line[0] == '\0'))
+	if ((line == NULL))
 	{
 		tokens[0] = "";
 		return (tokens);

@@ -13,13 +13,19 @@ char *sfsh_getline(void)
 
 	printf("($)");
 	getline(&line, &b_size, stdin);
-
+	if (_strcmp(line, "\n") == 0)
+	{
+		/* checks condition when enter is pressed */
+		free(line);
+		return (NULL);
+	}	
 	while (line[i])
 	{
 		i++;
 	}
 	if (i <= 1)
 	{
+		fflush(stdin);
 		line = "";
 	}
 	return (line);

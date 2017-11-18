@@ -54,6 +54,6 @@ int sfsh_exit(char **args)
 int sfsh_error(char **args)
 {
 	(void) args;
-	printf("Please enter a command\n");
+	/*printf("Please enter a command\n");*/
 	return (1);
 }
