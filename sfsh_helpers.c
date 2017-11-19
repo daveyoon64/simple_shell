@@ -1,42 +1,28 @@
 #include "sfsh.h"
 
 /**
- * arg_count      - Count how many sections @line can be broken into
+ * get_path   - Returns the path from the environment
  *
- * @line:           User input stored as a string
+ * @dest:       E
  *
- * Return:          How many tokens @line was broken into
+ * Return:      The path from the environment as a string
  */
 
-int arg_count(char *line)
+char *get_path(char *dest)
 {
-	int i = 1, match = 1;
+	int i = 0;
+	char temp[150];
 
-	for (i = 0; line[i] != '\0'; i++)
+	while (environ[i])
 	{
-		if (line[i] == ' ')
+		if (_strncmp("PATH=", environ[i], 5) == 0)
 		{
-			match++;
+			dest = _strcpy(temp, environ[i]);
+			break;
 		}
+		i++;
 	}
 
-	return (match);
+	return (dest);
 }
-/**
- * strcmp - compare two strings
- * @s1: the first string
- * @s2: the second string
- * Return: 0 if the same, positive/negative value otherwise
- */
-int _strcmp(char *s1, char *s2)
-{
-	int s1d, s2d;
 
-	do {
-		s1d = *s1++;
-		s2d = *s2++;
-		if (s1d == '\0')
-			return (s1d -s2d);
-	} while (s1d == s2d);
-	return (s1d - s2d);
-}
