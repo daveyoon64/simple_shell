@@ -20,7 +20,7 @@ void sfsh_loop(int argc, char *argv[])
 
 		if (status == 1)
 		{
-			/* when 1, line has already been freed */
+			free(line);
 			free(tokens);
 		}
 		else
