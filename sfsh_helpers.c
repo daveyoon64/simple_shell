@@ -1,28 +1,18 @@
 #include "sfsh.h"
 
 /**
- * get_path   - Returns the path from the environment
+ * signal_handler   - Catches and handles signals
  *
- * @dest:       E
- *
- * Return:      The path from the environment as a string
+ * @sig_num:          Signal trigger
  */
 
-char *get_path(char *dest)
+void signal_handler(int sig_num)
 {
-	int i = 0;
-	char temp[150];
+	/* sig_num is 2 with ctrl + c*/
 
-	while (environ[i])
+	if (sig_num)
 	{
-		if (_strncmp("PATH=", environ[i], 5) == 0)
-		{
-			dest = _strcpy(temp, environ[i]);
-			break;
-		}
-		i++;
+		printf("^c\n");
 	}
-
-	return (dest);
 }
 

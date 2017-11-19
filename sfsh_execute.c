@@ -3,9 +3,10 @@ void check_environ(char *path, char temp[], char **dirs);
 /**
  * sfsh_execute - search builtins for function to execute & send to sfsh_launch
  * @args: pointer to list of arguments
+ * @line: String holding path
  * Return: 1 if successful
  */
-int sfsh_execute(char **args)
+int sfsh_execute(char **args, char *line)
 {
 	int i = 0, size = 0;
 	char temp[150];
@@ -44,7 +45,7 @@ int sfsh_execute(char **args)
 	check_environ(path, temp, dirs);
 	free(path);
 	/* No builtins found, search path and run matching executable */
-	sfsh_launch(args, dirs);
+	sfsh_launch(args, dirs, line);
 	free(dirs);
 	return (1);
 }

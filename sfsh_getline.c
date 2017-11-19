@@ -18,7 +18,7 @@ char *sfsh_getline(void)
 		/* checks condition when enter is pressed */
 		free(line);
 		return (NULL);
-	}	
+	}
 	while (line[i])
 	{
 		i++;

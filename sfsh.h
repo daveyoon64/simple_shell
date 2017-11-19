@@ -27,8 +27,8 @@ typedef struct builtin
 void sfsh_loop(int argc, char *argv[]);
 char *sfsh_getline(void);
 char **sfsh_tokenize(char *line);
-int sfsh_execute(char **args);
-int sfsh_launch(char **args, char **dirs);
+int sfsh_execute(char **args, char *line);
+int sfsh_launch(char **args, char **dirs, char *line);
 void sfsh_search_path(char **args, char **dirs);
 
 /* built-ins */
@@ -44,5 +44,7 @@ char *_strcpy(char *dest, char *src);
 char *cmdcat(char *dir, char *file);
 int _strlen(char *str);
 char *get_path(char *dest);
+void signal_handler(int sig_num);
+
 
 #endif /* end of SFSH_H_ header guard */

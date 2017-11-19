@@ -3,9 +3,10 @@
  * sfsh_launch - find commannd in args and executes
  * @args: pointer to our array of arguments
  * @dirs: pointer to our array of directories
+ * @line: string holding path
  * Return: status as int from fork
  */
-int sfsh_launch(char **args, char **dirs)
+int sfsh_launch(char **args, char **dirs, char *line)
 {
 	int status = 1;
 	pid_t pid;
@@ -21,6 +22,9 @@ int sfsh_launch(char **args, char **dirs)
 		}
 		/* Given only program name, search path */
 		sfsh_search_path(args, dirs);
+		free(line);
+		free(args);
+		free(dirs);
 		exit(0);
 	}
 	else if (pid < 0)
