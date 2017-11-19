@@ -7,11 +7,14 @@
 int sfsh_env(char **args)
 {
 	int i = 0;
+	int len = 0;
 
 	(void) args;
 	while (environ[i])
 	{
-		printf("%s\n", environ[i]);
+		len = _strlen(environ[i]);
+		write(1, environ[i], len);
+		write(1, "\n", 1);
 		i++;
 	}
 	return (1);
@@ -23,14 +26,20 @@ int sfsh_env(char **args)
  */
 int sfsh_help(char **args)
 {
+	char *line = "|-----------------------------------------------|\n";
+	char *name = "| Name\t| Description\t\t\t\t|\n";
+	char *help = "| help\t| This document\t\t\t\t|\n";
+	char *env = "| env\t| Prints out the system environment\t|\n";
+	char *exit = "| exit\t| Exit Super Friendship shell\t\t|\n";
+
 	(void) args;
-	printf("|-----------------------------------------------|\n");
-	printf("| Name\t| Description\t\t\t\t|\n");
-	printf("|-------|---------------------------------------|\n");
-	printf("| help\t| This document\t\t\t\t|\n");
-	printf("| env\t| Prints out the system environment\t|\n");
-	printf("| exit\t| Exit Super Friendship shell\t\t|\n");
-	printf("|-----------------------------------------------|\n");
+	write(1, line, _strlen(line));
+	write(1, name, _strlen(name));
+	write(1, line, _strlen(line));
+	write(1, help, _strlen(help));
+	write(1, env, _strlen(env));
+	write(1, exit, _strlen(exit));
+	write(1, line, _strlen(line));
 	return (1);
 }
 /**
@@ -40,8 +49,10 @@ int sfsh_help(char **args)
  */
 int sfsh_exit(char **args)
 {
+	char *msg = "Leaving Super Friendship Shell. Your loss\n";
+
 	(void) args;
-	printf("Leaving Super Friendship Shell.  Your loss\n");
+	write(1, msg, _strlen(msg));
 	return (0);
 }
 /**
@@ -54,6 +65,5 @@ int sfsh_exit(char **args)
 int sfsh_error(char **args)
 {
 	(void) args;
-	/*printf("Please enter a command\n");*/
 	return (1);
 }

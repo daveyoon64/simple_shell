@@ -17,7 +17,7 @@ char **sfsh_tokenize(char *line)
 	tokens = malloc(sizeof(char *) * BUFFER_SIZE);
 	if (tokens == NULL)
 	{
-		printf("Failure to allocate\n");
+		write(1, "Failure to allocate\n", 20);
 		return (NULL);
 	}
 	/* Case handling if no user input */

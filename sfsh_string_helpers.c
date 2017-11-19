@@ -77,3 +77,17 @@ char *cmdcat(char *dir, char *file)
 
 	return (dir);
 }
+
+/**
+ * _strlen - returns the length of a string
+ * @str: our string to measure
+ * Return: length of string
+ */
+int _strlen(char *str)
+{
+	int i;
+
+	for (i = 0; str[i]; i++)
+		;
+	return (i);
+}
