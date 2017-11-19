@@ -7,11 +7,8 @@
  */
 int sfsh_launch(char **args, char **dirs)
 {
-	int status = 1, i = 0;
-	struct dirent *p_file;
-	DIR *p_dir;
+	int status = 1;
 	pid_t pid;
-	char *command = NULL;
 
 	pid = fork();
 	if (pid == 0)
@@ -23,20 +20,7 @@ int sfsh_launch(char **args, char **dirs)
 				perror("Error launching dir/prog\n");
 		}
 		/* Given only program name, search path */
-		for (i = 0; dirs[i] != '\0'; i++)
-		{
-			p_dir = opendir(dirs[i]);
-			while ((p_file = readdir(p_dir)) != NULL)
-			{
-				if (_strcmp(p_file->d_name, args[0]) == 0)
-				{
-					command = cmdcat(dirs[i], args[0]);
-					if (execve(command, args, NULL) == -1)
-						perror("Error finding program in path\n");
-				}
-			}
-			closedir(p_dir);
-		}
+		sfsh_search_path(args, dirs);
 		exit(0);
 	}
 	else if (pid < 0)
@@ -49,4 +33,33 @@ int sfsh_launch(char **args, char **dirs)
 		wait(&status);
 	}
 	return (status);
+}
+
+/**
+ * sfsh_search_path - search PATH variables for command
+ * @args: pointer to an array of arguments
+ * @dirs: pointer to an array of PATH directories
+ * Return: nothing
+ */
+void sfsh_search_path(char **args, char **dirs)
+{
+	char *command = NULL;
+	DIR *p_dir;
+	struct dirent *p_file;
+	int i;
+
+	for (i = 0; dirs[i] != '\0'; i++)
+	{
+		p_dir = opendir(dirs[i]);
+		while ((p_file = readdir(p_dir)) != NULL)
+		{
+			if (_strcmp(p_file->d_name, args[0]) == 0)
+			{
+				command = cmdcat(dirs[i], args[0]);
+				if (execve(command, args, NULL) == -1)
+					perror("No program in path\n");
+			}
+		}
+			closedir(p_dir);
+		}
 }

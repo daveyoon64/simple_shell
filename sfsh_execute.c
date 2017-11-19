@@ -21,7 +21,7 @@ int sfsh_execute(char **args)
 	dirs = malloc(sizeof(char *) * BUFFER_SIZE);
 	if (!dirs)
 	{
-		printf("Malloc error in execute\n");
+		write(1, "Malloc error i execute\n", 24);
 		exit(101);
 	}
 	size = (sizeof(builtins) / (sizeof(char *) * 2));

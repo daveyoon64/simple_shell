@@ -29,6 +29,7 @@ char *sfsh_getline(void);
 char **sfsh_tokenize(char *line);
 int sfsh_execute(char **args);
 int sfsh_launch(char **args, char **dirs);
+void sfsh_search_path(char **args, char **dirs);
 
 /* built-ins */
 int sfsh_help(char **args);
@@ -41,7 +42,7 @@ int _strcmp(char *s1, char *s2);
 int _strncmp(char *s1, char *s2, int length);
 char *_strcpy(char *dest, char *src);
 char *cmdcat(char *dir, char *file);
-
+int _strlen(char *str);
 char *get_path(char *dest);
 
 #endif /* end of SFSH_H_ header guard */
