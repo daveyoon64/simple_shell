@@ -44,14 +44,31 @@ int sfsh_help(char **args)
 }
 /**
  * sfsh_exit - function to exit sfsh
- * @args: pointer to array of tokens
- * Return: 0
+ * @args:      pointer to array of tokens
+ * Return:     0
  */
 int sfsh_exit(char **args)
 {
+	int i = 0, number = 0;
 	char *msg = "Leaving Super Friendship Shell. Your loss\n";
 
 	(void) args;
+
+	while (args[++i])
+		;
+
+	if (i > 1)
+	{
+		for (i = 0; args[1][i] != '\0'; i++)
+		{
+			number *= 10;
+			number += args[1][i] - '0';
+		}
+		write(1, msg, _strlen(msg));
+		free(args);
+		exit(number);
+	}
+
 	write(1, msg, _strlen(msg));
 	return (0);
 }

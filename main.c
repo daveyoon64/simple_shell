@@ -7,6 +7,7 @@
  */
 int main(int argc, char *argv[])
 {
+	signal(SIGINT, signal_handler);
 	sfsh_loop(argc, argv);
 	return (0);
 }
