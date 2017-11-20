@@ -26,6 +26,7 @@ A basic shell done in C.  Detailed list of features forthcoming.
 | sfsh_launch.c         | Creates child process to execute function        | 
 | sfsh_helpers.c        | Helper functions for the Super Friendship Shell  | 
 | sfsh_builtins0.c      | Implementation of built-in functions             | 
+| sfsh_builtins1.c      | Implementation of even more built-in functions   | 
 | sfsh_string_helpers.c | String helper functions for manipulation         | 
 
 ## Environment
