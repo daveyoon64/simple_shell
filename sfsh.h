@@ -36,6 +36,9 @@ int sfsh_help(char **args);
 int sfsh_exit(char **args);
 int sfsh_error(char **args);
 int sfsh_env(char **args);
+int sfsh_setenv(char **args);
+int sfsh_unsetenv(char **args);
+int sfsh_cd(char **args);
 
 /* helpers */
 int _strcmp(char *s1, char *s2);
