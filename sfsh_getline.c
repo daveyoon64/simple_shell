@@ -11,6 +11,7 @@ char *sfsh_getline(void)
 	size_t b_size = 0;
 	int i = 0;
 
+/*	getcwd(cwd, sizeof(cwd)); */
 	write(1, "($)", 3);
 	getline(&line, &b_size, stdin);
 	if (_strcmp(line, "\n") == 0)

@@ -84,3 +84,4 @@ int sfsh_error(char **args)
 	(void) args;
 	return (1);
 }
+

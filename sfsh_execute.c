@@ -14,9 +14,9 @@ int sfsh_execute(char **args, char *line)
 	char **dirs;
 
 	builtin_t builtins[] = {
-		{"help", sfsh_help},
-		{"exit", sfsh_exit},
-		{"env", sfsh_env},
+		{"help", sfsh_help}, {"exit", sfsh_exit},
+		{"env", sfsh_env}, {"cd", sfsh_cd},
+		{"setenv", sfsh_setenv}, {"unsetenv", sfsh_unsetenv},
 		{"", sfsh_error}
 	};
 	dirs = malloc(sizeof(char *) * BUFFER_SIZE);
