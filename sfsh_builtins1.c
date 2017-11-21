@@ -138,7 +138,7 @@ int sfsh_setenv(char **args)
 		;
 	if (i != 4 || args[3] == 0)
 	{
-		printf("Wrong arg count\n");
+		write(1, "Wrong arg count\n", 16);
 		return (1);
 	}
 	/* ensure no '=' for proper syntax processing */
@@ -146,7 +146,7 @@ int sfsh_setenv(char **args)
 	{
 		if (args[1][length] == '=')
 		{
-			printf("Incorrect format\n");
+			write(1, "Incorrect format\n", 17);
 			return (1);
 		}
 	}
@@ -188,7 +188,7 @@ int sfsh_unsetenv(char **args)
 		;
 	if (i != 2)
 	{
-		printf("wrong arg count\n");
+		write(1, "Wrong arg count\n", 16);
 		return (1);
 	}
 	/* ensure no '=' for proper syntax processing */
@@ -196,7 +196,7 @@ int sfsh_unsetenv(char **args)
 	{
 		if (args[1][length] == '=')
 		{
-			printf("Incorrect format\n");
+			write(1, "Incorrect format\n", 17);
 			return (1);
 		}
 	}
