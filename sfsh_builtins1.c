@@ -1,5 +1,40 @@
 #include "sfsh.h"
 
+
+void update_pwd(char *cwd)
+{
+	int i = 0, j = 0, length;
+	char *magic_path;
+	char *prefix = "OLDPWD=";
+
+	length = _strlen(cwd) + 7;
+	magic_path = malloc(sizeof(char) * length);
+
+	for (i = 0; i < length; i++)
+	{
+		if (i < _strlen(prefix))
+		{
+			magic_path[i] = prefix[i];
+		}
+		else
+		{
+			magic_path[i] = cwd[j];
+			j++;
+		}
+	}
+	magic_path[i] = '\0';
+	i = 0;
+
+	while (environ[i])
+	{
+		if (_strncmp("OLDPWD=", environ[i], 7) == 0)
+		{
+			environ[i] = magic_path;
+			break;
+		}
+		i++;
+	}
+}
 /**
  * sfsh_cd       - Changes current directory to first element of @args
  *
@@ -11,10 +46,10 @@ int sfsh_cd(char **args)
 {
 	int i = 0;
 	char *target;
+	char cwd[128];
 
-	while(args[++i])
+	while (args[++i])
 		;
-
 	if (i < 2)
 	{
 		i = 0;
@@ -28,34 +63,40 @@ int sfsh_cd(char **args)
 			i++;
 		}
 		target += 5;
-
+		getcwd(cwd, sizeof(cwd));
+		update_pwd(cwd);
 		if (chdir(target) != 0)
-		{
 			perror("");
-		}
 	}
 	else
 	{
-		printf("change to specified dir\n");
-		if (chdir(args[1]) != 0)
+		if (args[1][0] == '-')
 		{
-			perror("");
+			i = 0;
+			while (environ[i])
+			{
+				if (_strncmp("OLDPWD=", environ[i], 7) == 0)
+				{
+					target = environ[i];
+					break;
+				}
+				i++;
+			}
+			target += 7;
+			getcwd(cwd, sizeof(cwd));
+			update_pwd(cwd);
+			if (chdir(target) != 0)
+				perror("");
 		}
-
+		else
+		{
+			getcwd(cwd, sizeof(cwd));
+			update_pwd(cwd);
+			if (chdir(args[1]) != 0)
+				perror("");
+		}
 	}
-/*
-	printf("i is %d\n", i);
-	args[1] = "HOME";
-	args[2] = target;
-	args[3] = "1";
-	args[4] = '\0';
 
-	for (i = 0; args[i] != '\0'; i++)
-	{
-		printf("value: %s\n", args[i]);
-	}
-	sfsh_setenv(args);
-*/	
 	return (1);
 }
 /**

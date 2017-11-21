@@ -6,13 +6,17 @@
  */
 char *sfsh_getline(void)
 {
-	/* line is still reachable in valgrind if 'enter' as input */
 	char *line = NULL;
 	size_t b_size = 0;
-	int i = 0;
+	int i = 0, length = 0;
+	char cwd[128];
 
-/*	getcwd(cwd, sizeof(cwd)); */
-	write(1, "($)", 3);
+	getcwd(cwd, sizeof(cwd));
+	length = _strlen(cwd);
+
+	write(1, "(", 1);
+	write(1, cwd, length);
+	write(1, ")", 1);
 	getline(&line, &b_size, stdin);
 	if (_strcmp(line, "\n") == 0)
 	{
