@@ -26,11 +26,14 @@ int sfsh_env(char **args)
  */
 int sfsh_help(char **args)
 {
-	char *line = "|-----------------------------------------------|\n";
-	char *name = "| Name\t| Description\t\t\t\t|\n";
-	char *help = "| help\t| This document\t\t\t\t|\n";
-	char *env = "| env\t| Prints out the system environment\t|\n";
-	char *exit = "| exit\t| Exit Super Friendship shell\t\t|\n";
+	char *line = "|-------------------------------------------------------|\n";
+	char *name = "| Name\t\t| Description\t\t\t\t|\n";
+	char *help = "| help\t\t| This document\t\t\t\t|\n";
+	char *env = "| env\t\t| Prints out the system environment\t|\n";
+	char *setenv = "| setenv\t| Usage setenv variable value overwrite |\n";
+	char *unsetenv = "| unsetenv\t| Usage unsetenv variable \t\t|\n";
+	char *cd = "| cd \t\t| Changes the current working directory\t|\n";
+	char *exit = "| exit\t\t| Exit Super Friendship shell\t\t|\n";
 
 	(void) args;
 	write(1, line, _strlen(line));
@@ -38,6 +41,9 @@ int sfsh_help(char **args)
 	write(1, line, _strlen(line));
 	write(1, help, _strlen(help));
 	write(1, env, _strlen(env));
+	write(1, setenv, _strlen(setenv));
+	write(1, unsetenv, _strlen(unsetenv));
+	write(1, cd, _strlen(cd));
 	write(1, exit, _strlen(exit));
 	write(1, line, _strlen(line));
 	return (1);

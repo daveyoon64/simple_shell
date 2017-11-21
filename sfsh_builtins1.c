@@ -1,40 +1,74 @@
 #include "sfsh.h"
 
+/**
+ * update_pwd     - Update the OLDPWD entry in env with @cwd
+ *
+ * @cwd:            The current working directory as a string
+ * @prefix:         The entry to search for in the environment
+ */
 
-void update_pwd(char *cwd)
+void update_pwd(char *cwd, char *prefix)
 {
 	int i = 0, j = 0, length;
-	char *magic_path;
-	char *prefix = "OLDPWD=";
+	char *pwd_path;
 
-	length = _strlen(cwd) + 7;
-	magic_path = malloc(sizeof(char) * length);
+	length = _strlen(cwd) + _strlen(prefix);
+	pwd_path = malloc(sizeof(char) * length);
 
 	for (i = 0; i < length; i++)
 	{
 		if (i < _strlen(prefix))
 		{
-			magic_path[i] = prefix[i];
+			pwd_path[i] = prefix[i];
 		}
 		else
 		{
-			magic_path[i] = cwd[j];
+			pwd_path[i] = cwd[j];
 			j++;
 		}
 	}
-	magic_path[i] = '\0';
+	pwd_path[i] = '\0';
 	i = 0;
-
+	length = _strlen(prefix);
 	while (environ[i])
 	{
-		if (_strncmp("OLDPWD=", environ[i], 7) == 0)
+		if (_strncmp(prefix, environ[i], length) == 0)
 		{
-			environ[i] = magic_path;
+			environ[i] = pwd_path;
 			break;
 		}
 		i++;
 	}
 }
+
+/**
+ * path_match     - Helper to return processed string matching @entry
+ *
+ * @entry:          Entry in the environment to match for
+ *
+ * Return:          Entry in environment matching @entry
+ */
+char *path_match(char *entry)
+{
+	int i = 0, length = 0;
+	char *target;
+
+	length = _strlen(entry);
+
+	while (environ[i])
+	{
+		if (_strncmp(entry, environ[i], length) == 0)
+		{
+			target = environ[i];
+			break;
+		}
+		i++;
+	}
+	target += length;
+
+	return (target);
+}
+
 /**
  * sfsh_cd       - Changes current directory to first element of @args
  *
@@ -46,57 +80,43 @@ int sfsh_cd(char **args)
 {
 	int i = 0;
 	char *target;
-	char cwd[128];
+	char cwd[1024];
 
 	while (args[++i])
 		;
 	if (i < 2)
 	{
-		i = 0;
-		while (environ[i])
-		{
-			if (_strncmp("HOME=", environ[i], 5) == 0)
-			{
-				target = environ[i];
-				break;
-			}
-			i++;
-		}
-		target += 5;
+		target = path_match("HOME=");
 		getcwd(cwd, sizeof(cwd));
-		update_pwd(cwd);
+		update_pwd(cwd, "OLDPWD=");
 		if (chdir(target) != 0)
 			perror("");
+		getcwd(cwd, sizeof(cwd));
+		update_pwd(cwd, "PWD=");
 	}
 	else
 	{
 		if (args[1][0] == '-')
 		{
-			i = 0;
-			while (environ[i])
-			{
-				if (_strncmp("OLDPWD=", environ[i], 7) == 0)
-				{
-					target = environ[i];
-					break;
-				}
-				i++;
-			}
-			target += 7;
+
+			target = path_match("OLDPWD=");
 			getcwd(cwd, sizeof(cwd));
-			update_pwd(cwd);
+			update_pwd(cwd, "OLDPWD=");
 			if (chdir(target) != 0)
 				perror("");
+			getcwd(cwd, sizeof(cwd));
+			update_pwd(cwd, "PWD=");
 		}
 		else
 		{
 			getcwd(cwd, sizeof(cwd));
-			update_pwd(cwd);
+			update_pwd(cwd, "OLDPWD=");
 			if (chdir(args[1]) != 0)
 				perror("");
+			getcwd(cwd, sizeof(cwd));
+			update_pwd(cwd, "PWD=");
 		}
 	}
-
 	return (1);
 }
 /**
@@ -118,7 +138,7 @@ int sfsh_setenv(char **args)
 		;
 	if (i != 4 || args[3] == 0)
 	{
-		printf("Wrong arg count\n");
+		write(1, "Wrong arg count\n", 16);
 		return (1);
 	}
 	/* ensure no '=' for proper syntax processing */
@@ -126,7 +146,7 @@ int sfsh_setenv(char **args)
 	{
 		if (args[1][length] == '=')
 		{
-			printf("Incorrect format\n");
+			write(1, "Incorrect format\n", 17);
 			return (1);
 		}
 	}
@@ -168,7 +188,7 @@ int sfsh_unsetenv(char **args)
 		;
 	if (i != 2)
 	{
-		printf("wrong arg count\n");
+		write(1, "Wrong arg count\n", 16);
 		return (1);
 	}
 	/* ensure no '=' for proper syntax processing */
@@ -176,7 +196,7 @@ int sfsh_unsetenv(char **args)
 	{
 		if (args[1][length] == '=')
 		{
-			printf("Incorrect format\n");
+			write(1, "Incorrect format\n", 17);
 			return (1);
 		}
 	}
